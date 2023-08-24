@@ -41,7 +41,7 @@ This project will leverage the following technologies:
 
 **Friday:**
 - Refine the ball's movement mechanics for responsiveness and intuitive controls.
-- Implement the ball's interaction with obstacles, ensuring accurate collision detection.
+- Implement the ball's interaction with paddles, ensuring accurate collision detection.
 - Develop the paddles' mechanics and functionality.
 - Introduce random generation of paddle positions upon contact with the ball.
 - Fine-tune the randomness of paddle positions, ensuring an exciting and dynamic experience.
