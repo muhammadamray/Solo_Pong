@@ -20,6 +20,7 @@ This project will also encompass:
 
 ## Wireframes
 
+https://wireframe.cc/pro/pp/0f26898c6676892
 
 - Navigation links provide easy access to the project's GitHub repository, my LinkedIn and AngelList.
 - The game screen showcases the layout of the game and the general idea of how the ball will travel.
