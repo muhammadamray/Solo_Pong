@@ -1,8 +1,16 @@
-import Example from "./scripts/example";
+document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.querySelector('#canvas')
+    // you can in here instantiate a new JS object that receives the canvas element as an argument
 
-document.addEventListener("DOMContentLoaded", function(){
-    console.log("Hello world!");
+    const ctx = canvas.getContext("2d");
 
-    const main = document.getElementById("main");
-    new Example(main);
-});
+    
+    canvas.width = 600; 
+    canvas.height = 400; 
+
+    // Drawing on the canvas
+    ctx.fillStyle = "black"; 
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+})
+
