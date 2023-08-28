@@ -3,6 +3,7 @@ import Paddle from "./paddle"; // Import your Paddle class
 
 export default class AlmostPongGame {
   constructor(canvas) {
+    this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
     this.dimensions = { width: canvas.width, height: canvas.height };
     this.registerEvents();
@@ -19,18 +20,23 @@ export default class AlmostPongGame {
     this.running = false;
     this.score = 0;
     this.ball = new Ball(this.dimensions); // Create an instance of your Ball class
-    // this.leftPaddle = new Paddle(10, this.dimensions.height / 2 - 30); // Create an instance of your Paddle class
-    // this.rightPaddle = new Paddle( this.dimensions.width - 20, this.dimensions.height / 2 - 30); // Create another instance of your Paddle class
+    this.leftPaddle = new Paddle(this.dimensions, 0); // Create an instance of your Paddle class
+    this.rightPaddle = new Paddle(this.dimensions, this.dimensions.width - 10); // Create another instance of your Paddle class
 
     this.animate();
   }
 
   registerEvents() {
-    this.boundClickHandler = this.click.bind(this);
-    this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
-  // add event listner to the doc, listening to keydown (anon function => check to see if event value = "space")
-   // invoke restart game  
- }
+    // this.boundClickHandler = this.click.bind(this);
+    // this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
+    // add event listner to the doc, listening to keydown (anon function => check to see if event value = "space")
+    // invoke restart game
+    document.addEventListener("keydown", (event) => {
+      if (event.code === "Space") {
+        this.ball.jump();
+      }
+    });
+  }
 
   click(e) {
     if (!this.running) {
@@ -43,20 +49,50 @@ export default class AlmostPongGame {
 
   gameOver() {
     // Add collision detection and out-of-bounds checks for the ball and paddles
-    return (
-      this.ball.outOfBounds(this.dimensions) 
+    return this.ball.outOfBounds();
     //   || this.ball.collidesWith(this.leftPaddle.bounds()) ||
     //   this.ball.collidesWith(this.rightPaddle.bounds())
-    );
   }
+
+ 
+
+  getDistance(x1, y1, x2, y2) {
+    let xDistance = x2 - x1;
+    let yDistance = y2 - y1;
+    return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+  }
+
+  // hit(){
+  //   if (this.getDistance(this.ball.x, this.paddle.x, this.ball.y, this.paddle.y) < this.ball.radius + this.paddle.width) {
+  //     return this.ball.reverseDirection();
+  //   }
+  // }
+  
 
   animate() {
     // Move and draw the ball
-    this.ball.animate(this.ctx);
+    // this.ball.animate(this.ctx);
 
     // Move and draw the paddles
     // this.leftPaddle.draw(this.ctx);
     // this.rightPaddle.draw(this.ctx);
+
+    
+
+    this.ctx.fillStyle = "black";
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+    // Set neon blue border
+    this.ctx.strokeStyle = "#00FFFF"; // Neon blue color
+    this.ctx.lineWidth = 5;
+    this.ctx.strokeRect(0, 0, this.canvas.width, this.canvas.height);
+
+
+    this.leftPaddle.draw(this.ctx);
+    this.rightPaddle.draw(this.ctx);
+    this.ball.animate(this.ctx);
+
+    
 
     // Check for game over condition
     if (this.gameOver()) {
@@ -66,7 +102,7 @@ export default class AlmostPongGame {
 
     // If the game is running, continue animating
     // if (this.running) {
-      requestAnimationFrame(this.animate.bind(this));
+    requestAnimationFrame(this.animate.bind(this));
     // }
   }
 }

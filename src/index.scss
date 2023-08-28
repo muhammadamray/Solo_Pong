@@ -1,4 +1,4 @@
-#canvas { border: 2px solid black}
+// #canvas { border: 1px solid black}
 body {
     margin: 0;
     padding: 0;
@@ -10,3 +10,10 @@ body {
     border: purple;
 }
 
+score {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 7vh;
+    color: var(--foreground-color);
+}

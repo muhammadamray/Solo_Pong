@@ -27,6 +27,7 @@
 //   gameLoop();
 // });
 import Ball from './ball.js';
+import Paddle from './paddle.js';
 import AlmostPongGame from './game.js';
 
 
@@ -38,29 +39,29 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.width = 600;
     canvas.height = 400;
 
-    const ball = new Ball({ width: canvas.width, height: canvas.height });
+    // const ball = new Ball({ width: canvas.width, height: canvas.height });
 
-    document.addEventListener('keydown', (event) => {
-        if (event.code === 'Space') {
-            ball.jump();
-        }
-    });
+    // document.addEventListener('keydown', (event) => {
+    //     if (event.code === 'Space') {
+    //         ball.jump();
+    //     }
+    // });
 
-    function animate() {
-        // Set black background
-        ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // function animate() {
+        // // Set black background
+        // ctx.fillStyle = "black";
+        // ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Set neon blue border
-        ctx.strokeStyle = "#00FFFF"; // Neon blue color
-        ctx.lineWidth = 5;
-        ctx.strokeRect(0, 0, canvas.width, canvas.height);
+        // // Set neon blue border
+        // ctx.strokeStyle = "#00FFFF"; // Neon blue color
+        // ctx.lineWidth = 5;
+        // ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-        ball.move();
-        ball.draw(ctx);
+        // ball.move();
+        // ball.draw(ctx);
 
-        requestAnimationFrame(animate);
-    }
+        // requestAnimationFrame(animate);
+    // }
 
-    animate();
+    // animate();
 });
