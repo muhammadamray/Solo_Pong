@@ -1,4 +1,7 @@
 // #canvas { border: 1px solid black}
+#canvas {
+    margin-top: 300px; /* Adjust this value to lower the canvas */
+}
 body {
     margin: 0;
     padding: 0;
@@ -8,6 +11,12 @@ body {
     height: 100vh; 
     background-color: #444343; 
     border: purple;
+
+    background-image: url("../src/image.jpg");
+    background-size: cover;
+    background-size: 180%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 score {

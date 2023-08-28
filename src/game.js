@@ -60,67 +60,116 @@ export default class AlmostPongGame {
     return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
   }
 
+  // MAKES THE ENTIRE WALL REVERSE THE DIRECTION
+  // hit() {
+  //   // Calculate the distance between the ball and both paddles
+  //   const distanceToLeftPaddle = this.getDistance(
+  //     this.ball.x,
+  //     this.ball.y,
+  //     this.leftPaddle.x,
+  //     this.leftPaddle.y
+  //   );
+  //   const distanceToLeftPaddle2 = this.getDistance(
+  //     this.ball.x,
+  //     this.ball.y,
+  //     this.leftPaddle.x,
+  //     this.leftPaddle.y + this.leftPaddle.height
+  //   );
+  //   const distanceToRightPaddle = this.getDistance(
+  //     this.ball.x,
+  //     this.ball.y,
+  //     this.rightPaddle.x,
+  //     this.rightPaddle.y
+  //   );
+
+  //   const isTouchingPaddleX =
+  //     this.ball.x <= this.leftPaddle.x ||
+  //     this.ball.x + this.ball.radius >= this.rightPaddle.x;
+  //   const isTouchingPaddleY =
+  //     this.ball.y >= this.leftPaddle.y ||
+  //     this.ball.y + this.ball.radius <=
+  //       this.leftPaddle.y + this.leftPaddle.height ||
+  //     this.ball.y >= this.rightPaddle.y ||
+  //     this.ball.y + this.ball.radius <=
+  //       this.rightPaddle.y + this.rightPaddle.height;
+
+  //   // console.log({ isTouchingPaddleX, isTouchingPaddleY });
+  //   if (isTouchingPaddleX && isTouchingPaddleY) {
+  //     console.log("reverse");
+  //     return this.ball.reverseDirection(this.ctx);
+  //   }
+
+  //   // Check if the ball is colliding with the right paddle
+  //   if (
+  //     distanceToRightPaddle < this.ball.radius + this.rightPaddle.width &&
+  //     this.ball.x > this.rightPaddle.x
+  //   ) {
+  //     return this.ball.reverseDirection(this.ctx);
+  //   }
+  // }
+
+  //  THIS HIT FUNCTION MAKES THE BALL GLITCH AND IT GOES THROGUH THE PADDLE
+  // hit() {
+  //   const ballBounds = this.ball.bounds();
+  //   const leftPaddleBounds = this.leftPaddle.bounds();
+  //   const rightPaddleBounds = this.rightPaddle.bounds();
+
+  //   // Check if the ball collides with the left paddle
+  //   if (
+  //     ballBounds.right >= leftPaddleBounds.left &&
+  //     ballBounds.left <= leftPaddleBounds.right &&
+  //     ballBounds.bottom >= leftPaddleBounds.top &&
+  //     ballBounds.top <= leftPaddleBounds.bottom
+  //   ) {
+  //     this.ball.reverseDirection();
+  //   }
+
+  //   // Check if the ball collides with the right paddle
+  //   if (
+  //     ballBounds.right >= rightPaddleBounds.left &&
+  //     ballBounds.left <= rightPaddleBounds.right &&
+  //     ballBounds.bottom >= rightPaddleBounds.top &&
+  //     ballBounds.top <= rightPaddleBounds.bottom
+  //   ) {
+  //     this.ball.reverseDirection();
+  //   }
+  // }
+
   hit() {
-    // Calculate the distance between the ball and both paddles
-    const distanceToLeftPaddle = this.getDistance(
-      this.ball.x,
-      this.ball.y,
-      this.leftPaddle.x,
-      this.leftPaddle.y
-    );
-    const distanceToLeftPaddle2 = this.getDistance(
-      this.ball.x,
-      this.ball.y,
-      this.leftPaddle.x,
-      this.leftPaddle.y + this.leftPaddle.height
-    );
-    const distanceToRightPaddle = this.getDistance(
-      this.ball.x,
-      this.ball.y,
-      this.rightPaddle.x,
-      this.rightPaddle.y
-    );
+    const ballBounds = this.ball.bounds();
+    const leftPaddleBounds = this.leftPaddle.bounds();
+    const rightPaddleBounds = this.rightPaddle.bounds();
 
-    const isTouchingPaddleX =
-      this.ball.x <= this.leftPaddle.x ||
-      this.ball.x + this.ball.radius >= this.rightPaddle.x;
-    const isTouchingPaddleY =
-      this.ball.y >= this.leftPaddle.y ||
-      this.ball.y + this.ball.radius <=
-        this.leftPaddle.y + this.leftPaddle.height ||
-      this.ball.y >= this.rightPaddle.y ||
-      this.ball.y + this.ball.radius <=
-        this.rightPaddle.y + this.rightPaddle.height;
-
-    // console.log({ isTouchingPaddleX, isTouchingPaddleY });
-    if (isTouchingPaddleX && isTouchingPaddleY) {
-      console.log("reverse");
-      return this.ball.reverseDirection(this.ctx);
+    // Check for X-axis collision with left paddle
+    if (
+      ballBounds.right >= leftPaddleBounds.left &&
+      ballBounds.left <= leftPaddleBounds.right
+    ) {
+      // Check for Y-axis collision with left paddle
+      if (
+        ballBounds.bottom >= leftPaddleBounds.top &&
+        ballBounds.top <= leftPaddleBounds.bottom
+      ) {
+        // Reverse ball's X-direction and adjust its position
+        this.ball.reverseDirection();
+        this.ball.x = leftPaddleBounds.right + this.ball.radius;
+      }
     }
 
-    // console.log("hit");
-    // console.log(distanceToLeftPaddle, this.ball.radius + this.leftPaddle.width);
-    // console.log(this.ball.x, this.leftPaddle.x);
-    // console.log(
-    //   distanceToLeftPaddle2,
-    //   this.ball.radius + this.leftPaddle.width
-    // );
-    // // Check if the ball is colliding with the left paddle
-    // if (
-    //   (distanceToLeftPaddle < this.ball.radius + this.leftPaddle.width ||
-    //     distanceToLeftPaddle2 < this.ball.radius + this.leftPaddle.width) &&
-    //   this.ball.x < this.leftPaddle.x
-    // ) {
-    //   console.log("reverse");
-    //   return this.ball.reverseDirection(this.ctx);
-    // }
-
-    // Check if the ball is colliding with the right paddle
+    // Check for X-axis collision with right paddle
     if (
-      distanceToRightPaddle < this.ball.radius + this.rightPaddle.width &&
-      this.ball.x > this.rightPaddle.x
+      ballBounds.right >= rightPaddleBounds.left &&
+      ballBounds.left <= rightPaddleBounds.right
     ) {
-      return this.ball.reverseDirection(this.ctx);
+      // Check for Y-axis collision with right paddle
+      if (
+        ballBounds.bottom >= rightPaddleBounds.top &&
+        ballBounds.top <= rightPaddleBounds.bottom
+      ) {
+        // Reverse ball's X-direction and adjust its position
+        this.ball.reverseDirection();
+        this.ball.x = rightPaddleBounds.left - this.ball.radius;
+      }
     }
   }
 
