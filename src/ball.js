@@ -5,7 +5,7 @@ export default class Ball {
     this.dimensions = dimensions;
     this.x = this.dimensions.width / 2;
     this.y = this.dimensions.height / 2;
-    this.dx = -2;
+    this.dx = 3;
     this.dy = 0; // Vertical velocity
     this.outOfBounds = this.outOfBounds.bind(this)
     this.radius = BALL_RADIUS
@@ -56,7 +56,7 @@ export default class Ball {
   outOfBounds() {
     const aboveTheTop = this.y  <= 0;
     const belowTheBottom = this.y  >= this.dimensions.height;
-    const beyondLeft = this.x  < 0;
+    const beyondLeft = this.x  < (-1 * this.radius);
     const beyondRight = this.x  > this.dimensions.width;
     // debugger
     // console.log("aboveTheTop:", aboveTheTop, this.y)
