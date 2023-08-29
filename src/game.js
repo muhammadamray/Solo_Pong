@@ -9,7 +9,15 @@ export default class AlmostPongGame {
     this.registerEvents();
     // this.restart = this.restart.bind(this)
     this.restart();
+    this.score = 0;
   }
+
+  updateScore() {
+    const scoreValueElement = document.getElementById("score-value");
+    scoreValueElement.textContent = this.score;
+  }
+
+
 
   play() {
     this.running = true;
@@ -20,8 +28,8 @@ export default class AlmostPongGame {
     this.running = false;
     this.score = 0;
     this.ball = new Ball(this.dimensions); // Create an instance of your Ball class
-    this.leftPaddle = new Paddle(this.dimensions, 0); // Create an instance of your Paddle class
-    this.rightPaddle = new Paddle(this.dimensions, this.dimensions.width - 10); // Create another instance of your Paddle class
+    this.leftPaddle = new Paddle(this.dimensions, 11); // Create an instance of your Paddle class
+    this.rightPaddle = new Paddle(this.dimensions, this.dimensions.width - 21); // Create another instance of your Paddle class
 
     this.animate();
   }
@@ -152,6 +160,8 @@ export default class AlmostPongGame {
       ) {
         // Reverse ball's X-direction and adjust its position
         this.ball.reverseDirection();
+        this.leftPaddle.setPosition(this.ctx);
+        this.score++;
         this.ball.x = leftPaddleBounds.right + this.ball.radius;
       }
     }
@@ -168,18 +178,21 @@ export default class AlmostPongGame {
       ) {
         // Reverse ball's X-direction and adjust its position
         this.ball.reverseDirection();
+        this.rightPaddle.setPosition(this.ctx);
+        this.score++;
         this.ball.x = rightPaddleBounds.left - this.ball.radius;
       }
     }
   }
 
-  animate() {
-    // Move and draw the ball
-    // this.ball.animate(this.ctx);
+  paddleSize(){
+    if (this.score != 0 && this.score % 10 === 0) {
+      this.paddle.resize();
+    }
+  }
 
-    // Move and draw the paddles
-    // this.leftPaddle.draw(this.ctx);
-    // this.rightPaddle.draw(this.ctx);
+  animate() {
+    
 
     this.ctx.fillStyle = "black";
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -194,6 +207,9 @@ export default class AlmostPongGame {
     this.ball.animate(this.ctx);
 
     this.hit(this.ctx);
+    this.updateScore(this.ctx);
+
+    
 
     // Check for game over condition
     if (this.gameOver()) {

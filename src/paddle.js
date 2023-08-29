@@ -25,4 +25,8 @@ export default class Paddle {
     ctx.fillStyle = "white"; // Adjust color as needed
     ctx.fillRect(this.x, this.y, this.width, this.height);
   }
+
+  resize(){
+    this.height -= 5;
+  }
 }
