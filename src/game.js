@@ -17,8 +17,6 @@ export default class AlmostPongGame {
     scoreValueElement.textContent = this.score;
   }
 
-
-
   play() {
     this.running = true;
     this.animate();
@@ -35,10 +33,6 @@ export default class AlmostPongGame {
   }
 
   registerEvents() {
-    // this.boundClickHandler = this.click.bind(this);
-    // this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
-    // add event listner to the doc, listening to keydown (anon function => check to see if event value = "space")
-    // invoke restart game
     document.addEventListener("keydown", (event) => {
       if (event.code === "Space") {
         this.ball.jump();
@@ -50,16 +44,10 @@ export default class AlmostPongGame {
     if (!this.running) {
       this.play();
     }
-    // Call the appropriate method to move your paddles
-    // this.leftPaddle.moveUp();
-    // this.rightPaddle.moveUp();
   }
 
   gameOver() {
-    // Add collision detection and out-of-bounds checks for the ball and paddles
     return this.ball.outOfBounds();
-    //   || this.ball.collidesWith(this.leftPaddle.bounds()) ||
-    //   this.ball.collidesWith(this.rightPaddle.bounds())
   }
 
   getDistance(x1, y1, x2, y2) {
@@ -67,81 +55,6 @@ export default class AlmostPongGame {
     let yDistance = y2 - y1;
     return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
   }
-
-  // MAKES THE ENTIRE WALL REVERSE THE DIRECTION
-  // hit() {
-  //   // Calculate the distance between the ball and both paddles
-  //   const distanceToLeftPaddle = this.getDistance(
-  //     this.ball.x,
-  //     this.ball.y,
-  //     this.leftPaddle.x,
-  //     this.leftPaddle.y
-  //   );
-  //   const distanceToLeftPaddle2 = this.getDistance(
-  //     this.ball.x,
-  //     this.ball.y,
-  //     this.leftPaddle.x,
-  //     this.leftPaddle.y + this.leftPaddle.height
-  //   );
-  //   const distanceToRightPaddle = this.getDistance(
-  //     this.ball.x,
-  //     this.ball.y,
-  //     this.rightPaddle.x,
-  //     this.rightPaddle.y
-  //   );
-
-  //   const isTouchingPaddleX =
-  //     this.ball.x <= this.leftPaddle.x ||
-  //     this.ball.x + this.ball.radius >= this.rightPaddle.x;
-  //   const isTouchingPaddleY =
-  //     this.ball.y >= this.leftPaddle.y ||
-  //     this.ball.y + this.ball.radius <=
-  //       this.leftPaddle.y + this.leftPaddle.height ||
-  //     this.ball.y >= this.rightPaddle.y ||
-  //     this.ball.y + this.ball.radius <=
-  //       this.rightPaddle.y + this.rightPaddle.height;
-
-  //   // console.log({ isTouchingPaddleX, isTouchingPaddleY });
-  //   if (isTouchingPaddleX && isTouchingPaddleY) {
-  //     console.log("reverse");
-  //     return this.ball.reverseDirection(this.ctx);
-  //   }
-
-  //   // Check if the ball is colliding with the right paddle
-  //   if (
-  //     distanceToRightPaddle < this.ball.radius + this.rightPaddle.width &&
-  //     this.ball.x > this.rightPaddle.x
-  //   ) {
-  //     return this.ball.reverseDirection(this.ctx);
-  //   }
-  // }
-
-  //  THIS HIT FUNCTION MAKES THE BALL GLITCH AND IT GOES THROGUH THE PADDLE
-  // hit() {
-  //   const ballBounds = this.ball.bounds();
-  //   const leftPaddleBounds = this.leftPaddle.bounds();
-  //   const rightPaddleBounds = this.rightPaddle.bounds();
-
-  //   // Check if the ball collides with the left paddle
-  //   if (
-  //     ballBounds.right >= leftPaddleBounds.left &&
-  //     ballBounds.left <= leftPaddleBounds.right &&
-  //     ballBounds.bottom >= leftPaddleBounds.top &&
-  //     ballBounds.top <= leftPaddleBounds.bottom
-  //   ) {
-  //     this.ball.reverseDirection();
-  //   }
-
-  //   // Check if the ball collides with the right paddle
-  //   if (
-  //     ballBounds.right >= rightPaddleBounds.left &&
-  //     ballBounds.left <= rightPaddleBounds.right &&
-  //     ballBounds.bottom >= rightPaddleBounds.top &&
-  //     ballBounds.top <= rightPaddleBounds.bottom
-  //   ) {
-  //     this.ball.reverseDirection();
-  //   }
-  // }
 
   hit() {
     const ballBounds = this.ball.bounds();
@@ -185,15 +98,13 @@ export default class AlmostPongGame {
     }
   }
 
-  paddleSize(){
+  paddleSize() {
     if (this.score != 0 && this.score % 10 === 0) {
       this.paddle.resize();
     }
   }
 
   animate() {
-    
-
     this.ctx.fillStyle = "black";
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -209,17 +120,12 @@ export default class AlmostPongGame {
     this.hit(this.ctx);
     this.updateScore(this.ctx);
 
-    
-
     // Check for game over condition
     if (this.gameOver()) {
       alert("Game Over"); // Display a game over message
       this.restart();
     }
 
-    // If the game is running, continue animating
-    // if (this.running) {
     requestAnimationFrame(this.animate.bind(this));
-    // }
   }
 }

@@ -7,8 +7,8 @@ export default class Ball {
     this.y = this.dimensions.height / 2;
     this.dx = 3;
     this.dy = 0; // Vertical velocity
-    this.outOfBounds = this.outOfBounds.bind(this)
-    this.radius = BALL_RADIUS
+    this.outOfBounds = this.outOfBounds.bind(this);
+    this.radius = BALL_RADIUS;
   }
 
   jump() {
@@ -19,19 +19,12 @@ export default class Ball {
     this.x += this.dx;
     this.y += this.dy;
     this.dy += 0.4; // Adjust the gravity value as needed
-
-    // // Ensure the ball stays within bounds
-    // if (this.y + BALL_RADIUS > this.dimensions.height) {
-    //   this.y = this.dimensions.height - BALL_RADIUS;
-    //   this.dy = 0;
-    // }
   }
 
   reverseDirection() {
     this.dx *= -1; // Reverse the horizontal direction
   }
 
-  
   draw(ctx) {
     ctx.fillStyle = "white";
     ctx.beginPath();
@@ -54,22 +47,11 @@ export default class Ball {
   }
 
   outOfBounds() {
-    const aboveTheTop = this.y  <= 0;
-    const belowTheBottom = this.y  >= this.dimensions.height;
-    const beyondLeft = this.x  < (-1 * this.radius);
-    const beyondRight = this.x  > this.dimensions.width;
-    // debugger
-    // console.log("aboveTheTop:", aboveTheTop, this.y)
-    // console.log("belowTheBottom:", belowTheBottom, this.y)
-    // console.log("beyondLeft:", beyondLeft, this.x)
-    // console.log("beyondRight:", beyondRight, this.x)
-    // console.log("dimensions:", this.dimensions)
+    const aboveTheTop = this.y <= 0;
+    const belowTheBottom = this.y >= this.dimensions.height;
+    const beyondLeft = this.x < -1 * this.radius;
+    const beyondRight = this.x > this.dimensions.width;
 
     return aboveTheTop || belowTheBottom || beyondLeft || beyondRight;
-
-
   }
-
-  
-  
 }

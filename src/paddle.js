@@ -3,7 +3,7 @@ export default class Paddle {
     this.dimensions = dimensions;
     this.width = 10;
     this.height = 80;
-    this.y = (dimensions.height / 2) - (this.height / 2);
+    this.y = dimensions.height / 2 - this.height / 2;
     this.x = xPosition;
   }
 
@@ -26,7 +26,7 @@ export default class Paddle {
     ctx.fillRect(this.x, this.y, this.width, this.height);
   }
 
-  resize(){
+  resize() {
     this.height -= 5;
   }
 }
