@@ -9,6 +9,25 @@ export default class Ball {
     this.dy = 0; // Vertical velocity
     this.outOfBounds = this.outOfBounds.bind(this);
     this.radius = BALL_RADIUS;
+
+    this.trail = []; // Array to store previous positions
+    this.trailMaxLength = 6; // Adjust the length of the trail
+  }
+
+  addToTrail(x, y) {
+    this.trail.unshift({ x, y });
+    if (this.trail.length > this.trailMaxLength) {
+      this.trail.pop();
+    }
+  }
+
+  drawTrail(ctx) {
+    ctx.fillStyle = "rgba(255, 255, 255, 0.2)"; 
+    for (const pos of this.trail) {
+      ctx.beginPath();
+      ctx.arc(pos.x, pos.y, this.radius, 0, 2 * Math.PI);
+      ctx.fill();
+    }
   }
 
   jump() {
@@ -35,6 +54,8 @@ export default class Ball {
   animate(ctx) {
     this.draw(ctx);
     this.move(ctx);
+    this.addToTrail(this.x, this.y);
+    this.drawTrail(ctx);
   }
 
   bounds() {

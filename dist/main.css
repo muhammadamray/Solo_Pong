@@ -9,6 +9,7 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -19,6 +20,19 @@ body {
   background-size: 180%;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.start-page {
+  position: absolute;
+  top: 50%;
+  color: white;
+}
+
+.game-over {
+  position: absolute;
+  top: 50%;
+  color: white;
+  display: none;
 }
 
 .score {
@@ -33,4 +47,11 @@ body {
   font-size: 24px;
   font-family: monospace;
   color: white;
+}
+
+.github-icon {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

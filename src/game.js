@@ -10,6 +10,7 @@ export default class AlmostPongGame {
     // this.restart = this.restart.bind(this)
     this.restart();
     this.score = 0;
+    this.originalGame;
   }
 
   updateScore() {
@@ -23,17 +24,32 @@ export default class AlmostPongGame {
   }
 
   restart() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
     this.running = false;
     this.score = 0;
     this.ball = new Ball(this.dimensions); // Create an instance of your Ball class
     this.leftPaddle = new Paddle(this.dimensions, 11); // Create an instance of your Paddle class
     this.rightPaddle = new Paddle(this.dimensions, this.dimensions.width - 21); // Create another instance of your Paddle class
 
-    this.animate();
+    this.ctx.fillStyle = "black";
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+    // Set neon blue border
+    this.ctx.strokeStyle = "#00FFFF"; // Neon blue color
+    this.ctx.lineWidth = 5;
+    this.ctx.strokeRect(0, 0, this.canvas.width, this.canvas.height);
+
+    this.leftPaddle.draw(this.ctx);
+    this.rightPaddle.draw(this.ctx);
+    this.ball.animate(this.ctx);
+    // this.animate();
   }
 
   registerEvents() {
     document.addEventListener("keydown", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
       if (event.code === "Space") {
         this.ball.jump();
       }
@@ -122,10 +138,14 @@ export default class AlmostPongGame {
 
     // Check for game over condition
     if (this.gameOver()) {
-      alert("Game Over"); // Display a game over message
-      this.restart();
+      cancelAnimationFrame(this.originalGame);
+      const gameover = document.querySelector(".game-over");
+      gameover.style.display = "block";
+
+      const highscore = document.querySelector(".high-score");
+      highscore.innerText = `High Score: ${this.score}`;
     }
 
-    requestAnimationFrame(this.animate.bind(this));
+    this.originalGame = requestAnimationFrame(this.animate.bind(this));
   }
 }
