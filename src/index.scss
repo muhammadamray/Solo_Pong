@@ -1,6 +1,7 @@
 #canvas {
     margin-top: 300px; /* Adjust this value to lower the canvas */
 }
+
 body {
     margin: 0;
     padding: 0;
@@ -8,49 +9,48 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; 
-    background-color: #444343; 
-    border: purple;
+    height: 100vh; /* Set the body height to 100% of the viewport height */
+    background-color: #444343; /* Background color */
+    border: purple; /* Purple border for the body */
 
-    background-image: url("../images/image.jpg");
-    background-size: cover;
-    background-size: 180%;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-image: url("../images/image.jpg"); /* Background image URL */
+    background-size: cover; /* Cover the entire viewport with the background image */
+    background-size: 180%; /* Slightly larger background image for an effect */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Do not repeat the background image */
 }
 
 .start-page {
-    position: absolute;
-    top: 50%;
-    color: white;
-    font-family: 'Times New Roman', Times, serif;
+    position: absolute; /* Positioning relative to the nearest positioned ancestor */
+    top: 50%; /* Position the element at the vertical center */
+    color: white; /* Text color */
+    font-family: 'Times New Roman', Times, serif; /* Font family */
 }
 
 .game-over {
-    position: absolute;
-    top: 50%;
-    color: white;
-    display: none;
+    position: absolute; /* Positioning relative to the nearest positioned ancestor */
+    top: 50%; /* Position the element at the vertical center */
+    color: white; /* Text color */
+    display: none; /* Initially hide the game-over element */
 }
 
 .score {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 67%;
-    left: 50%;
-    margin-top: 1vh;
-    transform: translate(-50%, -50%);
-    font-size: 24px;
-    font-family: monospace;
-    color: white;
+    position: absolute; /* Positioning relative to the nearest positioned ancestor */
+    top: 67%; /* Position the element at 67% from the top */
+    left: 50%; /* Position the element at the horizontal center */
+    margin-top: 1vh; /* Top margin adjustment */
+    transform: translate(-50%, -50%); /* Center the element using transform */
+    font-size: 24px; /* Font size */
+    font-family: monospace; /* Font family */
+    color: white; /* Text color */
 }
 
 .github-icon {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute; /* Positioning relative to the nearest positioned ancestor */
+    top: 40%; /* Position the element at 40% from the top */
+    left: 50%; /* Position the element at the horizontal center */
+    transform: translate(-50%, -50%); /* Center the element using transform */
 }
-
