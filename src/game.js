@@ -21,6 +21,7 @@ export default class AlmostPongGame {
   play() {
     this.running = true;
     this.animate();
+    //basically runs the game
   }
 
   restart() {
@@ -47,6 +48,7 @@ export default class AlmostPongGame {
   }
 
   registerEvents() {
+    // on space click, makes the ball jump
     document.addEventListener("keydown", (event) => {
       event.preventDefault();
       event.stopPropagation();
