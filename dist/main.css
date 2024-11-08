@@ -15,7 +15,7 @@ body {
   height: 100vh;
   background-color: #444343;
   border: purple;
-  background-image: url("../images/land.gif");
+  background-image: url("https://yelp-clone-fullstack-proj-dev.s3.us-east-1.amazonaws.com/land.gif");
   background-size: cover;
   background-size: 100%;
   background-position: center;
