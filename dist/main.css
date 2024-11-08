@@ -15,9 +15,9 @@ body {
   height: 100vh;
   background-color: #444343;
   border: purple;
-  background-image: url("../images/image.jpg");
+  background-image: url("../images/land.gif");
   background-size: cover;
-  background-size: 180%;
+  background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
